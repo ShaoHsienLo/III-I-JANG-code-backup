@@ -1,0 +1,22 @@
+# Time domain
+# statis_cols = ['mean', 'std', 'min', 'max', 'skew', pd.DataFrame.kurt, rms, ptp]
+# df_group = df[config['time_domain_cols']].groupby(['Timestamp']).agg(statis_cols).reset_index()
+# df_group.columns = [col[0] + '_' + col[1] if col[1] != '' else col[0] for col in df_group.columns]
+
+# FFT
+try:
+    N = 100
+    T = 1 / 400.0
+    fft_series = df.iloc[0][config['info_col']]
+    for idx, val in enumerate(config['vibration_cols']):
+        signal = df[val].to_numpy()
+        fft_x = fftshift(fft(signal))
+        fft_x_list = abs(fft_x).round(3).tolist()
+        fft_series[val] = fft_x_list
+        xf = fftshift(fftfreq(N, T))
+        fft_series[val + '_ticks'] = xf.round(3).tolist()
+    fft_json = fft_series.to_dict()
+    for k, v in fft_json.items():
+        print('k: {}, len_v: {}, v: {}'.format(k, leng(v), v))
+except Exception as err:
+    print(err)
