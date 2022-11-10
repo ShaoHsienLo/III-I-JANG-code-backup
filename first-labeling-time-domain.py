@@ -50,7 +50,8 @@ df = pd.read_json("new-labels.json")
 json_data = df["label"][0]
 df = pd.DataFrame.from_records(json_data)
 df["self-label"] = label_lst
-
+print(df)
+exit(0)
 # path = r"C:\Users\samuello\Downloads\III\2022專案\韌性\data"
 # file = "data.csv"
 every_piece_length = 1500
