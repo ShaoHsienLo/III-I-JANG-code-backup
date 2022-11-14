@@ -42,9 +42,9 @@ def read_json_data():
 
 
 def read_aoi_labels():
-    excel = pd.read_excel("./1112 10片2448網片偏移量與焊接測試結果/1112 10片2448網片偏移量與焊接測試結果_AOI.xlsx")
-    e1 = excel.iloc[:20, 5: 9]
-    e2 = excel.iloc[:20, 14: 18]
+    excel = pd.read_excel("./1112 10片2448網片偏移量與焊接測試結果/1112 10片2448網片偏移量與焊接測試結果_AOI_sorted.xlsx")
+    e1 = excel.iloc[:20, 9: 13]
+    e2 = excel.iloc[:20, 22: 26]
     e2.columns = e1.columns
     df_excel = pd.concat([e1, e2], ignore_index=True)
     labels = list(df_excel.values.flatten())
