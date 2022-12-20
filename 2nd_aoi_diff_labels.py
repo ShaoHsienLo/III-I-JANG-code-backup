@@ -25,7 +25,20 @@ df["label"] = lst
 df_OK = df[df["label"] == "OK"]
 df_NG = df[df["label"] == "NG"]
 
-fig = make_subplots(rows=1, cols=3)
+threshold1 = 0.75
+threshold2 = 1.5
+
+print("[OK] 總個數: ", len(df_OK))
+print("[OK] < 0.75 個數: ", len(df_OK[df_OK["AOI偏差值"] < threshold1]))
+print("[OK] 0.75 ~ 1.5 個數: ", len(df_OK[(df_OK["AOI偏差值"] >= threshold1) & (df_OK["AOI偏差值"] <= threshold2)]))
+print("[OK] > 1.5 個數: ", len(df_OK[df_OK["AOI偏差值"] > threshold2]))
+print("[NG] 總個數: ", len(df_NG))
+print("[NG] < 0.75 個數: ", len(df_NG[df_NG["AOI偏差值"] < threshold1]))
+print("[NG] 0.75 ~ 1.5 個數: ", len(df_NG[(df_NG["AOI偏差值"] >= threshold1) & (df_NG["AOI偏差值"] <= threshold2)]))
+print("[NG] > 1.5 個數: ", len(df_NG[df_NG["AOI偏差值"] > threshold2]))
+
+exit(0)
+fig = make_subplots(rows=1, cols=3, shared_yaxes=True)
 fig.add_trace(
     go.Box(y=df["AOI偏差值"], name="Original"),
     row=1, col=1
